@@ -1,8 +1,8 @@
-# Selenay Çeyiz — Proje Kuralları
+# Selenay Takı — Proje Kuralları
 
 ## Genel
-- Çeyiz (düğün/evlilik hazırlığı) ürünleri satan statik web sitesi.
-- Renk paleti: sade, sıcak, pastel — krem, pudra, altın tonları.
+- Takı (kolye, küpe, yüzük, bileklik) satan statik web sitesi.
+- Renk paleti: şampanya krem, sıcak altın, gümüş-bej tonları — lüks ve sade.
 - Tüm kullanıcı metinleri Türkçe.
 
 ## Mimari
@@ -14,8 +14,11 @@
 - Yorum satırlarında iş mantığı ve bölüm amacı açıkça yazılır.
 - Temiz, okunabilir HTML/CSS/JS; gereksiz kütüphane yok.
 
+## Ürün kategorileri
+- `kolye`, `kupe`, `yuzuk`, `bileklik` — filtre ve katalog bu anahtarlarla uyumlu olmalı.
+
 ## Renkler (referans)
-- Arka plan: #FAF7F2
-- Vurgu / altın: #B8956B
-- Pudra: #E8D5D0
+- Arka plan: #FAF8F5
+- Vurgu / altın: #C4A574
+- Bej / pudra: #E2D6C8
 - Metin: #4A3F38

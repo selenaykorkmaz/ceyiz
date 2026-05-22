@@ -1,17 +1,17 @@
 /* ==========================================================================
-   Selenay Çeyiz — Ana stil dosyası
-   Sade çeyiz paleti: krem, pudra, yumuşak altın, sıcak kahve metin
+   Selenay Takı — Ana stil dosyası
+   Takı mağazası paleti: şampanya krem, gümüş ton, sıcak altın vurgu
    Bu dosya yalnızca görünüm tanımlar; iş mantığı main.js'dedir.
    ========================================================================== */
 
 /* --- Tasarım değişkenleri (tek kaynak: renk ve boşluk) --- */
 :root {
-  --renk-arka: #FAF7F2;
-  --renk-arka-ikincil: #F3EDE6;
-  --renk-pudra: #E8D5D0;
-  --renk-pudra-koyu: #D4B8B0;
-  --renk-altin: #B8956B;
-  --renk-altin-koyu: #9A7A55;
+  --renk-arka: #FAF8F5;
+  --renk-arka-ikincil: #F0EBE4;
+  --renk-pudra: #E2D6C8;
+  --renk-pudra-koyu: #C9B8A6;
+  --renk-altin: #C4A574;
+  --renk-altin-koyu: #A68B5C;
   --renk-metin: #4A3F38;
   --renk-metin-acik: #7A6B62;
   --renk-beyaz: #FFFFFF;
@@ -171,43 +171,6 @@ button {
   border-radius: 1px;
 }
 
-.cart-btn {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  color: var(--renk-metin);
-  border-radius: 50%;
-  transition: background var(--gecis);
-}
-
-.cart-btn:hover {
-  background: var(--renk-pudra);
-}
-
-.cart-count {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  line-height: 18px;
-  text-align: center;
-  color: var(--renk-beyaz);
-  background: var(--renk-altin);
-  border-radius: 9px;
-}
-
-.cart-count:empty,
-.cart-count[data-sifir="true"] {
-  display: none;
-}
-
 /* --- Butonlar --- */
 .btn {
   display: inline-flex;
@@ -258,9 +221,11 @@ button {
 .hero-bg {
   position: absolute;
   inset: 0;
+  /* Takı vitrin hissi: altın ve gümüş tonlu yumuşak ışık lekeleri */
   background:
-    radial-gradient(ellipse 80% 60% at 70% 40%, var(--renk-pudra) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 20% 80%, var(--renk-arka-ikincil) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 75% 35%, rgba(196, 165, 116, 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 45% at 15% 75%, var(--renk-pudra) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 50% 90%, var(--renk-arka-ikincil) 0%, transparent 45%),
     var(--renk-arka);
   z-index: 0;
 }
@@ -437,12 +402,13 @@ button {
 }
 
 .product-image {
-  aspect-ratio: 4 / 5;
+  /* Takı ürünleri için kare vitrin oranı */
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 3.5rem;
-  background: linear-gradient(160deg, var(--renk-pudra) 0%, var(--renk-arka-ikincil) 100%);
+  background: linear-gradient(145deg, var(--renk-arka-ikincil) 0%, var(--renk-pudra) 50%, var(--renk-arka) 100%);
 }
 
 .product-body {
@@ -472,10 +438,8 @@ button {
 }
 
 .product-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--bosluk-sm);
+  padding-top: var(--bosluk-xs);
+  border-top: 1px solid var(--renk-pudra);
 }
 
 .product-price {
@@ -484,18 +448,12 @@ button {
   color: var(--renk-altin-koyu);
 }
 
-.product-add {
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--renk-beyaz);
-  background: var(--renk-altin);
-  border-radius: var(--yuvarlak);
-  transition: background var(--gecis);
-}
-
-.product-add:hover {
-  background: var(--renk-altin-koyu);
+/* Boş kategori veya liste mesajı */
+.empty-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--renk-metin-acik);
+  padding: var(--bosluk-xl);
 }
 
 /* --- Hakkımızda --- */
@@ -663,118 +621,6 @@ button {
   font-size: 0.85rem;
   color: var(--renk-metin-acik);
   margin-top: var(--bosluk-xs);
-}
-
-/* --- Sepet paneli --- */
-.cart-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(74, 63, 56, 0.4);
-  z-index: 200;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--gecis), visibility var(--gecis);
-}
-
-.cart-overlay.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-.cart-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  max-width: 380px;
-  height: 100vh;
-  z-index: 201;
-  display: flex;
-  flex-direction: column;
-  background: var(--renk-beyaz);
-  border-left: 1px solid var(--renk-pudra);
-  transform: translateX(100%);
-  transition: transform 0.35s ease;
-}
-
-.cart-panel.open {
-  transform: translateX(0);
-}
-
-.cart-panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--bosluk-md) var(--bosluk-lg);
-  border-bottom: 1px solid var(--renk-pudra);
-}
-
-.cart-panel-header h2 {
-  font-family: var(--font-baslik);
-  font-size: 1.5rem;
-}
-
-.cart-close {
-  font-size: 1.75rem;
-  line-height: 1;
-  color: var(--renk-metin-acik);
-  padding: 0.25rem;
-}
-
-.cart-items {
-  flex: 1;
-  overflow-y: auto;
-  padding: var(--bosluk-md);
-}
-
-.cart-item {
-  display: flex;
-  gap: var(--bosluk-sm);
-  padding: var(--bosluk-sm) 0;
-  border-bottom: 1px solid var(--renk-pudra);
-}
-
-.cart-item-emoji {
-  font-size: 2rem;
-  flex-shrink: 0;
-}
-
-.cart-item-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.cart-item-info h4 {
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-
-.cart-item-info p {
-  font-size: 0.85rem;
-  color: var(--renk-altin-koyu);
-}
-
-.cart-item-remove {
-  font-size: 0.75rem;
-  color: var(--renk-metin-acik);
-  text-decoration: underline;
-  align-self: flex-start;
-}
-
-.cart-empty {
-  text-align: center;
-  color: var(--renk-metin-acik);
-  padding: var(--bosluk-xl);
-}
-
-.cart-footer {
-  padding: var(--bosluk-md) var(--bosluk-lg);
-  border-top: 1px solid var(--renk-pudra);
-}
-
-.cart-total {
-  margin-bottom: var(--bosluk-sm);
-  font-size: 1.05rem;
 }
 
 /* --- Mobil uyum --- */
