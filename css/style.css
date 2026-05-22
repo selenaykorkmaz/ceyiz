@@ -1,0 +1,823 @@
+/* ==========================================================================
+   Selenay Çeyiz — Ana stil dosyası
+   Sade çeyiz paleti: krem, pudra, yumuşak altın, sıcak kahve metin
+   Bu dosya yalnızca görünüm tanımlar; iş mantığı main.js'dedir.
+   ========================================================================== */
+
+/* --- Tasarım değişkenleri (tek kaynak: renk ve boşluk) --- */
+:root {
+  --renk-arka: #FAF7F2;
+  --renk-arka-ikincil: #F3EDE6;
+  --renk-pudra: #E8D5D0;
+  --renk-pudra-koyu: #D4B8B0;
+  --renk-altin: #B8956B;
+  --renk-altin-koyu: #9A7A55;
+  --renk-metin: #4A3F38;
+  --renk-metin-acik: #7A6B62;
+  --renk-beyaz: #FFFFFF;
+  --renk-golge: rgba(74, 63, 56, 0.08);
+  --renk-golge-koyu: rgba(74, 63, 56, 0.15);
+
+  --font-baslik: "Cormorant Garamond", Georgia, serif;
+  --font-govde: "Outfit", system-ui, sans-serif;
+
+  --bosluk-xs: 0.5rem;
+  --bosluk-sm: 1rem;
+  --bosluk-md: 1.5rem;
+  --bosluk-lg: 2.5rem;
+  --bosluk-xl: 4rem;
+
+  --gecis: 0.25s ease;
+  --yuvarlak: 4px;
+  --yuvarlak-buyuk: 12px;
+  --genislik-container: 1120px;
+}
+
+/* --- Sıfırlama ve temel tipografi --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-govde);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--renk-metin);
+  background-color: var(--renk-arka);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--genislik-container);
+  margin: 0 auto;
+  padding: 0 var(--bosluk-md);
+}
+
+/* --- Üst başlık (sabit gezinme) --- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(250, 247, 242, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--renk-pudra);
+  transition: box-shadow var(--gecis);
+}
+
+.site-header.scrolled {
+  box-shadow: 0 2px 20px var(--renk-golge);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  gap: var(--bosluk-md);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--bosluk-xs);
+  font-family: var(--font-baslik);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.logo-mark {
+  color: var(--renk-altin);
+  font-size: 0.9rem;
+}
+
+.logo em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--renk-altin);
+}
+
+.main-nav ul {
+  display: flex;
+  gap: var(--bosluk-lg);
+}
+
+.main-nav a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--renk-metin-acik);
+  transition: color var(--gecis);
+}
+
+.main-nav a:hover {
+  color: var(--renk-altin-koyu);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: var(--bosluk-xs);
+}
+
+.nav-toggle-bar {
+  width: 22px;
+  height: 2px;
+  background: var(--renk-metin);
+  border-radius: 1px;
+}
+
+.cart-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--renk-metin);
+  border-radius: 50%;
+  transition: background var(--gecis);
+}
+
+.cart-btn:hover {
+  background: var(--renk-pudra);
+}
+
+.cart-count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+  color: var(--renk-beyaz);
+  background: var(--renk-altin);
+  border-radius: 9px;
+}
+
+.cart-count:empty,
+.cart-count[data-sifir="true"] {
+  display: none;
+}
+
+/* --- Butonlar --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border-radius: var(--yuvarlak);
+  transition: background var(--gecis), color var(--gecis), border-color var(--gecis);
+}
+
+.btn-primary {
+  color: var(--renk-beyaz);
+  background: var(--renk-altin);
+}
+
+.btn-primary:hover {
+  background: var(--renk-altin-koyu);
+}
+
+.btn-outline {
+  color: var(--renk-metin);
+  border: 1px solid var(--renk-pudra-koyu);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  border-color: var(--renk-altin);
+  color: var(--renk-altin-koyu);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* --- Hero bölümü --- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 72px;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, var(--renk-pudra) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, var(--renk-arka-ikincil) 0%, transparent 50%),
+    var(--renk-arka);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: var(--bosluk-xl) 0;
+  max-width: 640px;
+}
+
+.hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--renk-altin);
+  margin-bottom: var(--bosluk-md);
+}
+
+.hero h1 {
+  font-family: var(--font-baslik);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--renk-metin);
+  margin-bottom: var(--bosluk-md);
+}
+
+.hero-accent {
+  font-style: italic;
+  color: var(--renk-altin);
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: var(--renk-metin-acik);
+  max-width: 480px;
+  margin-bottom: var(--bosluk-lg);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bosluk-sm);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: var(--bosluk-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--renk-metin-acik);
+  opacity: 0.7;
+}
+
+/* --- Bölüm başlıkları (ortak) --- */
+.section-header {
+  margin-bottom: var(--bosluk-lg);
+}
+
+.section-header--center {
+  text-align: center;
+}
+
+.section-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--renk-altin);
+  margin-bottom: var(--bosluk-xs);
+}
+
+.section-header h2 {
+  font-family: var(--font-baslik);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  color: var(--renk-metin);
+}
+
+/* --- Kategori kartları --- */
+.categories {
+  padding: var(--bosluk-xl) 0;
+  background: var(--renk-arka-ikincil);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--bosluk-md);
+}
+
+.category-card {
+  padding: var(--bosluk-lg);
+  background: var(--renk-beyaz);
+  border: 1px solid var(--renk-pudra);
+  border-radius: var(--yuvarlak-buyuk);
+  text-align: center;
+  transition: transform var(--gecis), box-shadow var(--gecis);
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px var(--renk-golge);
+}
+
+.category-icon {
+  font-size: 2rem;
+  margin-bottom: var(--bosluk-sm);
+}
+
+.category-card h3 {
+  font-family: var(--font-baslik);
+  font-size: 1.35rem;
+  margin-bottom: var(--bosluk-xs);
+}
+
+.category-card p {
+  font-size: 0.9rem;
+  color: var(--renk-metin-acik);
+}
+
+/* --- Ürün alanı --- */
+.products {
+  padding: var(--bosluk-xl) 0;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bosluk-xs);
+  margin-bottom: var(--bosluk-lg);
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--renk-metin-acik);
+  border: 1px solid var(--renk-pudra);
+  border-radius: 999px;
+  background: var(--renk-beyaz);
+  transition: all var(--gecis);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  color: var(--renk-beyaz);
+  background: var(--renk-altin);
+  border-color: var(--renk-altin);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--bosluk-lg);
+}
+
+/* Ürün kartı: JS ile üretilen yapı */
+.product-card {
+  background: var(--renk-beyaz);
+  border: 1px solid var(--renk-pudra);
+  border-radius: var(--yuvarlak-buyuk);
+  overflow: hidden;
+  transition: box-shadow var(--gecis);
+}
+
+.product-card:hover {
+  box-shadow: 0 16px 40px var(--renk-golge);
+}
+
+.product-image {
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  background: linear-gradient(160deg, var(--renk-pudra) 0%, var(--renk-arka-ikincil) 100%);
+}
+
+.product-body {
+  padding: var(--bosluk-md);
+}
+
+.product-category {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--renk-altin);
+  margin-bottom: 0.25rem;
+}
+
+.product-card h3 {
+  font-family: var(--font-baslik);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--bosluk-xs);
+}
+
+.product-desc {
+  font-size: 0.85rem;
+  color: var(--renk-metin-acik);
+  margin-bottom: var(--bosluk-sm);
+  min-height: 2.5em;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--bosluk-sm);
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--renk-altin-koyu);
+}
+
+.product-add {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--renk-beyaz);
+  background: var(--renk-altin);
+  border-radius: var(--yuvarlak);
+  transition: background var(--gecis);
+}
+
+.product-add:hover {
+  background: var(--renk-altin-koyu);
+}
+
+/* --- Hakkımızda --- */
+.about {
+  padding: var(--bosluk-xl) 0;
+  background: var(--renk-arka-ikincil);
+}
+
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--bosluk-xl);
+  align-items: center;
+}
+
+.about-frame {
+  position: relative;
+  padding: var(--bosluk-xl);
+  background: var(--renk-beyaz);
+  border: 1px solid var(--renk-pudra);
+  border-radius: var(--yuvarlak-buyuk);
+}
+
+.about-quote {
+  font-family: var(--font-baslik);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--renk-pudra);
+  display: block;
+  margin-bottom: var(--bosluk-sm);
+}
+
+.about-frame p {
+  font-family: var(--font-baslik);
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--renk-metin);
+}
+
+.about-text h2 {
+  font-family: var(--font-baslik);
+  font-size: 2rem;
+  margin-bottom: var(--bosluk-md);
+}
+
+.about-text > p {
+  color: var(--renk-metin-acik);
+  margin-bottom: var(--bosluk-md);
+}
+
+.about-features li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: var(--bosluk-xs);
+  color: var(--renk-metin);
+}
+
+.about-features li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--renk-altin);
+  font-size: 0.7rem;
+}
+
+/* --- İletişim --- */
+.contact {
+  padding: var(--bosluk-xl) 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--bosluk-xl);
+  align-items: start;
+}
+
+.contact-form label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  margin-top: var(--bosluk-sm);
+}
+
+.contact-form label:first-of-type {
+  margin-top: 0;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--renk-metin);
+  background: var(--renk-beyaz);
+  border: 1px solid var(--renk-pudra);
+  border-radius: var(--yuvarlak);
+  transition: border-color var(--gecis);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--renk-altin);
+}
+
+.form-notice {
+  margin-top: var(--bosluk-sm);
+  font-size: 0.9rem;
+  min-height: 1.4em;
+}
+
+.form-notice.success {
+  color: var(--renk-altin-koyu);
+}
+
+.contact-info {
+  padding: var(--bosluk-lg);
+  background: var(--renk-beyaz);
+  border: 1px solid var(--renk-pudra);
+  border-radius: var(--yuvarlak-buyuk);
+}
+
+.info-block {
+  margin-bottom: var(--bosluk-md);
+}
+
+.info-block:last-child {
+  margin-bottom: 0;
+}
+
+.info-block h3 {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--renk-altin);
+  margin-bottom: 0.25rem;
+}
+
+.info-block a:hover {
+  color: var(--renk-altin);
+}
+
+/* --- Alt bilgi --- */
+.site-footer {
+  padding: var(--bosluk-lg) 0;
+  border-top: 1px solid var(--renk-pudra);
+  text-align: center;
+}
+
+.footer-brand {
+  font-family: var(--font-baslik);
+  font-size: 1.1rem;
+}
+
+.footer-brand em {
+  font-style: italic;
+  color: var(--renk-altin);
+}
+
+.footer-tagline {
+  font-size: 0.85rem;
+  color: var(--renk-metin-acik);
+  margin-top: var(--bosluk-xs);
+}
+
+/* --- Sepet paneli --- */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(74, 63, 56, 0.4);
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--gecis), visibility var(--gecis);
+}
+
+.cart-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 380px;
+  height: 100vh;
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  background: var(--renk-beyaz);
+  border-left: 1px solid var(--renk-pudra);
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+}
+
+.cart-panel.open {
+  transform: translateX(0);
+}
+
+.cart-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--bosluk-md) var(--bosluk-lg);
+  border-bottom: 1px solid var(--renk-pudra);
+}
+
+.cart-panel-header h2 {
+  font-family: var(--font-baslik);
+  font-size: 1.5rem;
+}
+
+.cart-close {
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--renk-metin-acik);
+  padding: 0.25rem;
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--bosluk-md);
+}
+
+.cart-item {
+  display: flex;
+  gap: var(--bosluk-sm);
+  padding: var(--bosluk-sm) 0;
+  border-bottom: 1px solid var(--renk-pudra);
+}
+
+.cart-item-emoji {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.cart-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-info h4 {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.cart-item-info p {
+  font-size: 0.85rem;
+  color: var(--renk-altin-koyu);
+}
+
+.cart-item-remove {
+  font-size: 0.75rem;
+  color: var(--renk-metin-acik);
+  text-decoration: underline;
+  align-self: flex-start;
+}
+
+.cart-empty {
+  text-align: center;
+  color: var(--renk-metin-acik);
+  padding: var(--bosluk-xl);
+}
+
+.cart-footer {
+  padding: var(--bosluk-md) var(--bosluk-lg);
+  border-top: 1px solid var(--renk-pudra);
+}
+
+.cart-total {
+  margin-bottom: var(--bosluk-sm);
+  font-size: 1.05rem;
+}
+
+/* --- Mobil uyum --- */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .main-nav {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: var(--renk-beyaz);
+    border-bottom: 1px solid var(--renk-pudra);
+    padding: var(--bosluk-md);
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform var(--gecis), opacity var(--gecis), visibility var(--gecis);
+  }
+
+  .main-nav.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: var(--bosluk-sm);
+  }
+
+  .about-inner,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+}

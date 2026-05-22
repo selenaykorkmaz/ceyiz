@@ -1,0 +1,21 @@
+# Selenay Çeyiz — Proje Kuralları
+
+## Genel
+- Çeyiz (düğün/evlilik hazırlığı) ürünleri satan statik web sitesi.
+- Renk paleti: sade, sıcak, pastel — krem, pudra, altın tonları.
+- Tüm kullanıcı metinleri Türkçe.
+
+## Mimari
+- Dosyalar birbirinden bağımsız; paylaşımlı önbellek (shared cache) klasörü veya dosyalar arası çekme sistemi kullanılmaz.
+- `index.html` kendi başına açılabilir; stil ve script harici dosyalardan yüklenir (standart link, cache değil).
+- `css/style.css` ve `js/main.js` yalnızca kendi sorumluluklarında; ortak state için harici servis yok.
+
+## Kod
+- Yorum satırlarında iş mantığı ve bölüm amacı açıkça yazılır.
+- Temiz, okunabilir HTML/CSS/JS; gereksiz kütüphane yok.
+
+## Renkler (referans)
+- Arka plan: #FAF7F2
+- Vurgu / altın: #B8956B
+- Pudra: #E8D5D0
+- Metin: #4A3F38

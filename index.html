@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Selenay Çeyiz — Evinize huzur katacak özenle seçilmiş çeyiz ve ev tekstili ürünleri.">
+  <title>Selenay Çeyiz | Özenle Seçilmiş Çeyiz Ürünleri</title>
+  <!-- Harici stil: bağımsız css/style.css dosyasından yüklenir -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Üst gezinme: logo, menü ve sepet özeti -->
+  <header class="site-header" id="ust">
+    <div class="container header-inner">
+      <a href="#ust" class="logo" aria-label="Selenay Çeyiz ana sayfa">
+        <span class="logo-mark" aria-hidden="true">✦</span>
+        <span class="logo-text">Selenay <em>Çeyiz</em></span>
+      </a>
+      <button type="button" class="nav-toggle" id="menuAc" aria-expanded="false" aria-controls="anaMenu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="sr-only">Menüyü aç</span>
+      </button>
+      <nav class="main-nav" id="anaMenu" aria-label="Ana menü">
+        <ul>
+          <li><a href="#urunler">Ürünler</a></li>
+          <li><a href="#koleksiyonlar">Koleksiyonlar</a></li>
+          <li><a href="#hakkimizda">Hakkımızda</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="cart-btn" id="sepetAc" aria-label="Sepeti göster">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M6 6h15l-1.5 9h-12L6 6z"/>
+          <circle cx="9" cy="20" r="1"/>
+          <circle cx="18" cy="20" r="1"/>
+          <path d="M6 6L5 3H2"/>
+        </svg>
+        <span class="cart-count" id="sepetAdet">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Karşılama alanı: marka mesajı ve kısa tanıtım -->
+    <section class="hero" aria-labelledby="heroBaslik">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <p class="hero-eyebrow">Yeni evinize hoş geldiniz</p>
+        <h1 id="heroBaslik">Çeyiziniz,<br><span class="hero-accent">zarafetle</span> tamamlansın</h1>
+        <p class="hero-desc">
+          Nevresim takımlarından havlu setlerine, mutfak çeyizinden salon tekstiline —
+          her parça sade ve zamansız bir estetikle seçildi.
+        </p>
+        <div class="hero-actions">
+          <a href="#urunler" class="btn btn-primary">Ürünleri Keşfet</a>
+          <a href="#koleksiyonlar" class="btn btn-outline">Koleksiyonlar</a>
+        </div>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <span>Aşağı kaydır</span>
+      </div>
+    </section>
+
+    <!-- Öne çıkan kategoriler -->
+    <section class="categories" id="koleksiyonlar" aria-labelledby="kategoriBaslik">
+      <div class="container">
+        <header class="section-header">
+          <p class="section-eyebrow">Koleksiyonlar</p>
+          <h2 id="kategoriBaslik">Her oda için özen</h2>
+        </header>
+        <div class="category-grid">
+          <article class="category-card">
+            <div class="category-icon" aria-hidden="true">🛏</div>
+            <h3>Yatak Odası</h3>
+            <p>Nevresim, yatak örtüsü ve yastık kılıfları</p>
+          </article>
+          <article class="category-card">
+            <div class="category-icon" aria-hidden="true">🛁</div>
+            <h3>Banyo</h3>
+            <p>Havlu, bornoz ve banyo paspası setleri</p>
+          </article>
+          <article class="category-card">
+            <div class="category-icon" aria-hidden="true">🍽</div>
+            <h3>Mutfak</h3>
+            <p>Masa örtüsü, peçete ve mutfak tekstili</p>
+          </article>
+          <article class="category-card">
+            <div class="category-icon" aria-hidden="true">🛋</div>
+            <h3>Salon</h3>
+            <p>Örtü, runner ve dekoratif yastıklar</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ürün listesi: JS ile doldurulur -->
+    <section class="products" id="urunler" aria-labelledby="urunBaslik">
+      <div class="container">
+        <header class="section-header">
+          <p class="section-eyebrow">Mağaza</p>
+          <h2 id="urunBaslik">Seçili ürünler</h2>
+        </header>
+        <div class="filter-bar" role="group" aria-label="Kategori filtresi">
+          <button type="button" class="filter-btn active" data-filter="tumu">Tümü</button>
+          <button type="button" class="filter-btn" data-filter="yatak">Yatak Odası</button>
+          <button type="button" class="filter-btn" data-filter="banyo">Banyo</button>
+          <button type="button" class="filter-btn" data-filter="mutfak">Mutfak</button>
+          <button type="button" class="filter-btn" data-filter="salon">Salon</button>
+        </div>
+        <div class="product-grid" id="urunListesi" role="list">
+          <!-- Ürün kartları main.js tarafından oluşturulur -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Marka hikayesi -->
+    <section class="about" id="hakkimizda" aria-labelledby="hakkimizdaBaslik">
+      <div class="container about-inner">
+        <div class="about-visual" aria-hidden="true">
+          <div class="about-frame">
+            <span class="about-quote">“</span>
+            <p>Ev kurmak bir çeyiz sandığından fazlasıdır; her dokunuş hatıra taşır.</p>
+          </div>
+        </div>
+        <div class="about-text">
+          <p class="section-eyebrow">Hakkımızda</p>
+          <h2 id="hakkimizdaBaslik">Selenay Çeyiz</h2>
+          <p>
+            Yıllardır gelinlerin ve yeni ev sahiplerinin en özel günlerine eşlik ediyoruz.
+            Ürünlerimizi doğal kumaşlar, pastel tonlar ve dayanıklı işçilikle seçiyoruz —
+            sade bir çeyiz estetiği için.
+          </p>
+          <ul class="about-features">
+            <li>%100 pamuk ve keten seçenekleri</li>
+            <li>Özenli paketleme ve hediye notu</li>
+            <li>Türkiye geneli kargo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- İletişim ve sipariş bilgisi -->
+    <section class="contact" id="iletisim" aria-labelledby="iletisimBaslik">
+      <div class="container">
+        <header class="section-header section-header--center">
+          <p class="section-eyebrow">İletişim</p>
+          <h2 id="iletisimBaslik">Sorularınız için buradayız</h2>
+        </header>
+        <div class="contact-grid">
+          <form class="contact-form" id="iletisimForm" novalidate>
+            <label for="ad">Adınız</label>
+            <input type="text" id="ad" name="ad" required autocomplete="name" placeholder="Adınız Soyadınız">
+            <label for="eposta">E-posta</label>
+            <input type="email" id="eposta" name="eposta" required autocomplete="email" placeholder="ornek@email.com">
+            <label for="mesaj">Mesajınız</label>
+            <textarea id="mesaj" name="mesaj" rows="4" required placeholder="Ürün veya sipariş hakkında yazın..."></textarea>
+            <button type="submit" class="btn btn-primary btn-full">Gönder</button>
+            <p class="form-notice" id="formBildirim" role="status" aria-live="polite"></p>
+          </form>
+          <aside class="contact-info">
+            <div class="info-block">
+              <h3>Mağaza</h3>
+              <p>İstanbul, Türkiye</p>
+            </div>
+            <div class="info-block">
+              <h3>Telefon</h3>
+              <p><a href="tel:+902121234567">0212 123 45 67</a></p>
+            </div>
+            <div class="info-block">
+              <h3>E-posta</h3>
+              <p><a href="mailto:info@selenayceyiz.com">info@selenayceyiz.com</a></p>
+            </div>
+            <div class="info-block">
+              <h3>Çalışma saatleri</h3>
+              <p>Pzt–Cmt: 10:00 – 19:00</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-brand">Selenay <em>Çeyiz</em> © 2026</p>
+      <p class="footer-tagline">Sade renkler, kalıcı anılar.</p>
+    </div>
+  </footer>
+
+  <!-- Sepet paneli (yan çekmece) -->
+  <aside class="cart-panel" id="sepetPanel" aria-labelledby="sepetBaslik" aria-hidden="true">
+    <div class="cart-panel-header">
+      <h2 id="sepetBaslik">Sepetim</h2>
+      <button type="button" class="cart-close" id="sepetKapat" aria-label="Sepeti kapat">×</button>
+    </div>
+    <ul class="cart-items" id="sepetIcerik" role="list"></ul>
+    <div class="cart-footer">
+      <p class="cart-total">Toplam: <strong id="sepetToplam">0 ₺</strong></p>
+      <button type="button" class="btn btn-primary btn-full" id="siparisVer">Siparişi Tamamla</button>
+    </div>
+  </aside>
+  <div class="cart-overlay" id="sepetOverlay" aria-hidden="true"></div>
+
+  <!-- Bağımsız script: tüm etkileşim main.js içinde -->
+  <script src="js/main.js"></script>
+</body>
+</html>
