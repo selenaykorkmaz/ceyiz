@@ -6,6 +6,7 @@
 
 - Kolye, küpe, yüzük ve bileklik kategorileri
 - Kategori filtresi ile ürün vitrini (sepet yok)
+- Ana sayfada altın/gümüş arka plan slayderi (`images/` klasörü)
 - Mobil uyumlu tasarım
 - Bağımsız dosya yapısı (`index.html`, `css/style.css`, `js/main.js`)
 

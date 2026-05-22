@@ -37,9 +37,14 @@
   </header>
 
   <main>
-    <!-- Karşılama alanı: marka mesajı ve kısa tanıtım -->
+    <!-- Karşılama alanı: altın/gümüş arka plan slayderi ve marka mesajı -->
     <section class="hero" aria-labelledby="heroBaslik">
-      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-slider" id="heroSlider" aria-hidden="true">
+        <div class="hero-slide is-active" data-slide="0" style="background-image: url('images/hero-gold.jpg');"></div>
+        <div class="hero-slide" data-slide="1" style="background-image: url('images/hero-silver.jpg');"></div>
+        <div class="hero-slide" data-slide="2" style="background-image: url('images/hero-gold-silver.jpg');"></div>
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container hero-content">
         <p class="hero-eyebrow">Işığınızı tamamlayan parçalar</p>
         <h1 id="heroBaslik">Her anınıza<br><span class="hero-accent">zarafet</span> katsın</h1>
@@ -51,6 +56,15 @@
           <a href="#urunler" class="btn btn-primary">Koleksiyonu Keşfet</a>
           <a href="#koleksiyonlar" class="btn btn-outline">Kategoriler</a>
         </div>
+      </div>
+      <div class="hero-controls" aria-label="Slayt kontrolleri">
+        <button type="button" class="hero-arrow hero-arrow--prev" id="heroOnceki" aria-label="Önceki slayt">‹</button>
+        <div class="hero-dots" id="heroNoktalar" role="tablist" aria-label="Slayt seçimi">
+          <button type="button" class="hero-dot is-active" role="tab" aria-selected="true" aria-label="Altın slayt" data-slide="0"></button>
+          <button type="button" class="hero-dot" role="tab" aria-selected="false" aria-label="Gümüş slayt" data-slide="1"></button>
+          <button type="button" class="hero-dot" role="tab" aria-selected="false" aria-label="Altın ve gümüş slayt" data-slide="2"></button>
+        </div>
+        <button type="button" class="hero-arrow hero-arrow--next" id="heroSonraki" aria-label="Sonraki slayt">›</button>
       </div>
       <div class="hero-scroll" aria-hidden="true">
         <span>Aşağı kaydır</span>

@@ -218,23 +218,105 @@ button {
   overflow: hidden;
 }
 
-.hero-bg {
+/* Arka plan slayderi: altın, gümüş ve karışık görseller */
+.hero-slider {
   position: absolute;
   inset: 0;
-  /* Takı vitrin hissi: altın ve gümüş tonlu yumuşak ışık lekeleri */
-  background:
-    radial-gradient(ellipse 70% 50% at 75% 35%, rgba(196, 165, 116, 0.25) 0%, transparent 50%),
-    radial-gradient(ellipse 55% 45% at 15% 75%, var(--renk-pudra) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 30% at 50% 90%, var(--renk-arka-ikincil) 0%, transparent 45%),
-    var(--renk-arka);
   z-index: 0;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1.2s ease, transform 6s ease;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+/* Metin okunabilirliği için krem tonlu katman */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    105deg,
+    rgba(250, 248, 245, 0.92) 0%,
+    rgba(250, 248, 245, 0.78) 45%,
+    rgba(250, 248, 245, 0.55) 100%
+  );
 }
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   padding: var(--bosluk-xl) 0;
   max-width: 640px;
+}
+
+/* Slayt okları ve nokta göstergeleri */
+.hero-controls {
+  position: absolute;
+  bottom: calc(var(--bosluk-lg) + 2rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: var(--bosluk-md);
+}
+
+.hero-arrow {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--renk-metin);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--renk-pudra);
+  border-radius: 50%;
+  transition: background var(--gecis), color var(--gecis);
+}
+
+.hero-arrow:hover {
+  background: var(--renk-altin);
+  color: var(--renk-beyaz);
+  border-color: var(--renk-altin);
+}
+
+.hero-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--renk-altin);
+  background: transparent;
+  transition: background var(--gecis), transform var(--gecis);
+}
+
+.hero-dot.is-active {
+  background: var(--renk-altin);
+  transform: scale(1.15);
+}
+
+.hero-dot:hover {
+  background: var(--renk-pudra-koyu);
 }
 
 .hero-eyebrow {
@@ -275,9 +357,10 @@ button {
 
 .hero-scroll {
   position: absolute;
-  bottom: var(--bosluk-lg);
+  bottom: var(--bosluk-sm);
   left: 50%;
   transform: translateX(-50%);
+  z-index: 2;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -665,5 +748,26 @@ button {
 
   .hero-actions .btn {
     width: 100%;
+  }
+
+  /* Mobilde metin daha okunaklı olsun diye overlay güçlendirilir */
+  .hero-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(250, 248, 245, 0.94) 0%,
+      rgba(250, 248, 245, 0.88) 60%,
+      rgba(250, 248, 245, 0.75) 100%
+    );
+  }
+
+  .hero-controls {
+    bottom: calc(var(--bosluk-md) + 1.5rem);
+    gap: var(--bosluk-sm);
+  }
+
+  .hero-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
   }
 }

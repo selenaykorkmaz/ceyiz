@@ -148,6 +148,93 @@
     elUrunListesi.innerHTML = filtrelenmis.map(urunKartiHtml).join("");
   }
 
+  /* Hero slayder durumu */
+  var heroAktifIndeks = 0;
+  var heroZamanlayici = null;
+  var HERO_SLAYT_SURE = 5500;
+
+  /**
+   * Belirtilen slayda geçer; slayt ve nokta göstergelerini günceller
+   * @param {number} indeks
+   */
+  function heroSlaytaGit(indeks) {
+    var slaytlar = document.querySelectorAll(".hero-slide");
+    var noktalar = document.querySelectorAll(".hero-dot");
+    if (!slaytlar.length) return;
+
+    heroAktifIndeks = (indeks + slaytlar.length) % slaytlar.length;
+
+    slaytlar.forEach(function (slide, i) {
+      slide.classList.toggle("is-active", i === heroAktifIndeks);
+    });
+
+    noktalar.forEach(function (dot, i) {
+      var aktif = i === heroAktifIndeks;
+      dot.classList.toggle("is-active", aktif);
+      dot.setAttribute("aria-selected", aktif ? "true" : "false");
+    });
+  }
+
+  function heroSonrakiSlayt() {
+    heroSlaytaGit(heroAktifIndeks + 1);
+  }
+
+  function heroOncekiSlayt() {
+    heroSlaytaGit(heroAktifIndeks - 1);
+  }
+
+  function heroOtomatikDurdur() {
+    if (heroZamanlayici) {
+      clearInterval(heroZamanlayici);
+      heroZamanlayici = null;
+    }
+  }
+
+  function heroOtomatikBaslat() {
+    heroOtomatikDurdur();
+    heroZamanlayici = setInterval(heroSonrakiSlayt, HERO_SLAYT_SURE);
+  }
+
+  /**
+   * Ana sayfa altın/gümüş arka plan slayderini başlatır
+   */
+  function heroSlayderBaslat() {
+    var slider = document.getElementById("heroSlider");
+    if (!slider || slider.querySelectorAll(".hero-slide").length < 2) return;
+
+    var onceki = document.getElementById("heroOnceki");
+    var sonraki = document.getElementById("heroSonraki");
+
+    if (onceki) {
+      onceki.addEventListener("click", function () {
+        heroOncekiSlayt();
+        heroOtomatikBaslat();
+      });
+    }
+
+    if (sonraki) {
+      sonraki.addEventListener("click", function () {
+        heroSonrakiSlayt();
+        heroOtomatikBaslat();
+      });
+    }
+
+    document.querySelectorAll(".hero-dot").forEach(function (dot) {
+      dot.addEventListener("click", function () {
+        var hedef = parseInt(dot.getAttribute("data-slide"), 10);
+        if (!isNaN(hedef)) {
+          heroSlaytaGit(hedef);
+          heroOtomatikBaslat();
+        }
+      });
+    });
+
+    slider.addEventListener("mouseenter", heroOtomatikDurdur);
+    slider.addEventListener("mouseleave", heroOtomatikBaslat);
+
+    heroOtomatikBaslat();
+  }
+
   /**
    * Mobil menü aç/kapa
    * @param {boolean} acik
@@ -235,6 +322,7 @@
     elFormBildirim = document.getElementById("formBildirim");
 
     urunleriGoster();
+    heroSlayderBaslat();
     olaylariBagla();
   }
 
