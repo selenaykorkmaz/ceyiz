@@ -1,5 +1,5 @@
 /**
- * Selenay Takı — Ana etkileşim dosyası
+ * Selenayın Takı Dünyası — Ana etkileşim dosyası
  * Ürün vitrini, kategori filtresi ve iletişim formu burada tanımlıdır.
  * Sepet yok; yalnızca ürün sergileme amaçlıdır.
  * Harici önbellek veya başka dosyadan veri çekme yok; tüm veri bu dosyada.

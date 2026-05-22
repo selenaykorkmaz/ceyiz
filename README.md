@@ -1,4 +1,4 @@
-# Selenay Takı
+# Selenayın Takı Dünyası
 
 Özenle seçilmiş takı koleksiyonları için statik e-ticaret vitrin sitesi.
 
