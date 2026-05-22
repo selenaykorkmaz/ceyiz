@@ -245,9 +245,11 @@
     if (acik) {
       nav.classList.add("open");
       btn.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
     } else {
       nav.classList.remove("open");
       btn.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
     }
   }
 

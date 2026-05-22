@@ -44,6 +44,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -54,6 +55,7 @@ body {
   color: var(--renk-metin);
   background-color: var(--renk-arka);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 img {
@@ -212,10 +214,12 @@ button {
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   padding-top: 72px;
   overflow: hidden;
+  width: 100%;
 }
 
 /* Arka plan slayderi: altın, gümüş ve karışık görseller */
@@ -706,20 +710,79 @@ button {
   margin-top: var(--bosluk-xs);
 }
 
-/* --- Mobil uyum --- */
+/* --- Tablet ve mobil uyum --- */
+@media (max-width: 992px) {
+  .about-inner,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-visual {
+    order: 2;
+  }
+
+  .about-text {
+    order: 1;
+  }
+}
+
 @media (max-width: 768px) {
+  :root {
+    --bosluk-xl: 2.75rem;
+    --bosluk-lg: 1.75rem;
+  }
+
+  .container {
+    padding-left: var(--bosluk-sm);
+    padding-right: var(--bosluk-sm);
+  }
+
+  /* Üst menü: hamburger sağda, açılır menü tam genişlik */
+  .site-header {
+    padding-left: max(var(--bosluk-sm), env(safe-area-inset-left));
+    padding-right: max(var(--bosluk-sm), env(safe-area-inset-right));
+  }
+
+  .header-inner {
+    height: 64px;
+    gap: var(--bosluk-sm);
+  }
+
+  .logo {
+    font-size: 1.15rem;
+    min-width: 0;
+  }
+
+  .logo-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .nav-toggle {
     display: flex;
+    flex-shrink: 0;
+    margin-left: auto;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    z-index: 102;
   }
 
   .main-nav {
     position: fixed;
-    top: 72px;
+    top: 64px;
     left: 0;
     right: 0;
+    z-index: 101;
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
     background: var(--renk-beyaz);
     border-bottom: 1px solid var(--renk-pudra);
-    padding: var(--bosluk-md);
+    padding: var(--bosluk-md) var(--bosluk-sm);
+    box-shadow: 0 12px 24px var(--renk-golge);
     transform: translateY(-120%);
     opacity: 0;
     visibility: hidden;
@@ -734,40 +797,197 @@ button {
 
   .main-nav ul {
     flex-direction: column;
-    gap: var(--bosluk-sm);
+    gap: 0;
   }
 
-  .about-inner,
-  .contact-grid {
-    grid-template-columns: 1fr;
+  .main-nav a {
+    display: block;
+    padding: 0.85rem 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--renk-pudra);
+  }
+
+  .main-nav li:last-child a {
+    border-bottom: none;
+  }
+
+  /* Hero: slayt kontrolleri ile metin çakışmasını önle */
+  .hero {
+    min-height: 100svh;
+    min-height: 100dvh;
+    align-items: flex-start;
+    padding-top: 64px;
+    padding-bottom: 5.5rem;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(250, 248, 245, 0.96) 0%,
+      rgba(250, 248, 245, 0.9) 55%,
+      rgba(250, 248, 245, 0.82) 100%
+    );
+  }
+
+  .hero-content {
+    width: 100%;
+    padding: var(--bosluk-lg) 0 var(--bosluk-sm);
+    max-width: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--bosluk-sm);
+  }
+
+  .hero h1 {
+    font-size: clamp(1.85rem, 7.5vw, 2.5rem);
+    margin-bottom: var(--bosluk-sm);
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    max-width: none;
+    margin-bottom: var(--bosluk-md);
   }
 
   .hero-actions {
     flex-direction: column;
+    width: 100%;
   }
 
   .hero-actions .btn {
     width: 100%;
   }
 
-  /* Mobilde metin daha okunaklı olsun diye overlay güçlendirilir */
-  .hero-overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(250, 248, 245, 0.94) 0%,
-      rgba(250, 248, 245, 0.88) 60%,
-      rgba(250, 248, 245, 0.75) 100%
-    );
+  /* "Aşağı kaydır" slayt kontrolleriyle üst üste binmesin */
+  .hero-scroll {
+    display: none;
   }
 
   .hero-controls {
-    bottom: calc(var(--bosluk-md) + 1.5rem);
+    left: 0;
+    right: 0;
+    bottom: max(var(--bosluk-sm), env(safe-area-inset-bottom));
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 var(--bosluk-sm);
+    justify-content: center;
     gap: var(--bosluk-sm);
+    box-sizing: border-box;
   }
 
   .hero-arrow {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    font-size: 1.35rem;
+  }
+
+  .hero-dot {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+  }
+
+  .categories,
+  .products,
+  .about,
+  .contact {
+    padding-top: var(--bosluk-lg);
+    padding-bottom: var(--bosluk-lg);
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--bosluk-sm);
+  }
+
+  .category-card {
+    padding: var(--bosluk-md);
+  }
+
+  .category-card h3 {
+    font-size: 1.15rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--bosluk-sm);
+  }
+
+  .product-body {
+    padding: var(--bosluk-sm);
+  }
+
+  .product-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .product-image {
+    font-size: 2.5rem;
+  }
+
+  .filter-bar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-bottom: var(--bosluk-md);
+    padding-bottom: 0.35rem;
+  }
+
+  .filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .about-frame {
+    padding: var(--bosluk-lg);
+  }
+
+  .about-quote {
+    font-size: 3rem;
+  }
+
+  .about-frame p {
     font-size: 1.25rem;
+  }
+
+  .about-text h2 {
+    font-size: 1.65rem;
+  }
+
+  .contact-info {
+    padding: var(--bosluk-md);
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px;
+  }
+}
+
+/* Küçük telefonlar */
+@media (max-width: 400px) {
+  .category-grid,
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-controls {
+    gap: 0.35rem;
+  }
+
+  .hero-arrow {
+    width: 40px;
+    height: 40px;
   }
 }
