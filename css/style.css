@@ -811,13 +811,13 @@ button {
     border-bottom: none;
   }
 
-  /* Hero: slayt kontrolleri ile metin çakışmasını önle */
+  /* Hero: metin kutusu küçük, ortalı, yanlardan boşluklu */
   .hero {
     min-height: 100svh;
     min-height: 100dvh;
-    align-items: flex-start;
-    padding-top: 64px;
-    padding-bottom: 5.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 1.35rem 5.5rem;
   }
 
   .hero-overlay {
@@ -829,36 +829,49 @@ button {
     );
   }
 
-  .hero-content {
+  .hero .hero-content.container {
     width: 100%;
-    padding: var(--bosluk-lg) 0 var(--bosluk-sm);
-    max-width: none;
+    max-width: 22rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--bosluk-md) var(--bosluk-sm);
+    text-align: center;
+    box-sizing: border-box;
   }
 
   .hero-eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    margin-bottom: var(--bosluk-sm);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.65rem;
   }
 
   .hero h1 {
-    font-size: clamp(1.85rem, 7.5vw, 2.5rem);
-    margin-bottom: var(--bosluk-sm);
+    font-size: clamp(1.45rem, 5.5vw, 1.85rem);
+    line-height: 1.2;
+    margin-bottom: 0.65rem;
   }
 
   .hero-desc {
-    font-size: 0.95rem;
-    max-width: none;
-    margin-bottom: var(--bosluk-md);
+    font-size: 0.82rem;
+    line-height: 1.55;
+    max-width: 18rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--bosluk-sm);
   }
 
   .hero-actions {
     flex-direction: column;
+    align-items: center;
     width: 100%;
+    gap: 0.5rem;
   }
 
   .hero-actions .btn {
     width: 100%;
+    max-width: 16rem;
+    padding: 0.65rem 1rem;
+    font-size: 0.8rem;
   }
 
   /* "Aşağı kaydır" slayt kontrolleriyle üst üste binmesin */
@@ -980,6 +993,26 @@ button {
   .category-grid,
   .product-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero .hero-content.container {
+    max-width: 19rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .hero h1 {
+    font-size: 1.35rem;
+  }
+
+  .hero-desc {
+    font-size: 0.78rem;
+    max-width: 16rem;
   }
 
   .hero-controls {
